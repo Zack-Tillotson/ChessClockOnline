@@ -36,7 +36,6 @@ gem 'haml-rails'
 gem 'haml'
 
 # Heroku stuff
-gem 'rails_12factor', group: :production
 gem 'pg', group: :production
 
 # Use ActiveModel has_secure_password
