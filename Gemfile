@@ -35,6 +35,11 @@ gem 'therubyracer'
 gem 'haml-rails'
 gem 'haml'
 
+# Heroku stuff
+group :production do
+  gem 'pg'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
