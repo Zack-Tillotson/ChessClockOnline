@@ -1,6 +1,12 @@
 Rotund - The Syncronized Web Chess Clock
 Zack Tillotson
 
+##########################################
+
+URL: http://sync-chess-clock.herokuapp.com
+
+##########################################
+
 In chess a special chess clock is used to control how long each player has to play the game. Each player starts with some amount of time on their timer, when it's their turn to act their timer counts down. At the end of their turn their clock pauses. If your clock counts all the way down to zero then you lose!
 
 The idea of this site is to allow peole on the web this same functionality regardless of whether they are on the same computer or not.
