@@ -29,6 +29,5 @@ production:
   encoding: unicode
   pool: 5
   timeout: 5000
-  host: localhost
   database: user
-  username: app-dev
+  password:
