@@ -1,0 +1,27 @@
+%h1 Listing clocks
+
+%table
+  %tr
+    %th Active
+    %th Current player
+    %th Player one time
+    %th Player two time
+    %th Key
+    %th
+    %th
+    %th
+
+  - @clocks.each do |clock|
+    %tr
+      %td= clock.active
+      %td= clock.current_player
+      %td= clock.player_one_time
+      %td= clock.player_two_time
+      %td= clock.key
+      %td= link_to 'Show', clock
+      %td= link_to 'Edit', edit_clock_path(clock)
+      %td= link_to 'Destroy', clock, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Clock', new_clock_path

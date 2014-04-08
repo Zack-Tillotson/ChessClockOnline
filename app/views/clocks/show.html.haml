@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Active:
+  = @clock.active
+%p
+  %b Current player:
+  = @clock.current_player
+%p
+  %b Player one time:
+  = @clock.player_one_time
+%p
+  %b Player two time:
+  = @clock.player_two_time
+%p
+  %b Key:
+  = @clock.key
+
+= link_to 'Edit', edit_clock_path(@clock)
+\|
+= link_to 'Back', clocks_path
