@@ -36,9 +36,8 @@ gem 'haml-rails'
 gem 'haml'
 
 # Heroku stuff
-group :production do
-  gem 'pg'
-end
+gem 'rails_12factor', group: :production
+gem 'pg', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
