@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class ClocksController < ApplicationController
   before_action :set_clock, only: [:show, :edit, :update, :destroy]
 
@@ -7,18 +9,9 @@ class ClocksController < ApplicationController
     @clocks = Clock.all
   end
 
-  # GET /clocks/1
-  # GET /clocks/1.json
+  # GET /123401230h10101gh1ghg10
+  # GET /123401230h10101gh1ghg10.json
   def show
-  end
-
-  def keyview
-    @clock = Clock.where(key: params[:key]).take
-  end
-
-  # GET /clocks/new
-  def new
-    @clock = Clock.new
   end
 
   # GET /clocks/1/edit
@@ -28,14 +21,14 @@ class ClocksController < ApplicationController
   # POST /clocks
   # POST /clocks.json
   def create
-    @clock = Clock.new(clock_params)
+    @clock = Clock.new(default_params())
 
     respond_to do |format|
       if @clock.save
-        format.html { redirect_to @clock, notice: 'Clock was successfully created.' }
+        format.html { redirect_to key_view_clock_url(@clock.key), notice: 'Clock was successfully created.' }
         format.json { render action: 'show', status: :created, location: @clock }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to root_url }
         format.json { render json: @clock.errors, status: :unprocessable_entity }
       end
     end
@@ -68,11 +61,15 @@ class ClocksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_clock
-      @clock = Clock.find(params[:id])
+      @clock = Clock.where(key: params[:key]).take
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clock_params
-      params.require(:clock).permit(:active, :current_player, :player_one_time, :player_two_time, :key)
+      params.permit(:active, :current_player, :player_one_time, :player_two_time, :key)
+    end
+
+    def default_params
+      {:active => false, :current_player => 1, :player_one_time => 60, :player_two_time => 60, :key => SecureRandom.hex}
     end
 end

@@ -3,7 +3,7 @@ SyncedChessClock::Application.routes.draw do
 
   root 'welcome#index'
 
-  get ':key' => 'clocks#keyview'
+  get ':key' => 'clocks#show', :as => "key_view_clock"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
