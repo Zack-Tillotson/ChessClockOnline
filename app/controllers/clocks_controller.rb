@@ -12,6 +12,11 @@ class ClocksController < ApplicationController
   # GET /123401230h10101gh1ghg10
   # GET /123401230h10101gh1ghg10.json
   def show
+    @switched_clock = @clock.dup
+    @switched_clock.switch_current_player
+
+    puts "clock! #{@clock.id} #{@clock.key}"
+    puts "switched! #{@switched_clock.id} #{@switched_clock.key}"
   end
 
   # GET /clocks/1/edit
@@ -39,7 +44,7 @@ class ClocksController < ApplicationController
   def update
     respond_to do |format|
       if @clock.update(clock_params)
-        format.html { redirect_to @clock, notice: 'Clock was successfully updated.' }
+        format.html { redirect_to key_view_clock_url @clock.key, notice: 'Clock was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -61,7 +66,8 @@ class ClocksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_clock
-      @clock = Clock.where(key: params[:key]).take
+      @clock = Clock.where(key: params[:key]).take if params[:key]
+      @clock = Clock.find(params[:id]) if !@clock and params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

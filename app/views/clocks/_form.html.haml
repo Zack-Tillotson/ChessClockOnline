@@ -7,9 +7,6 @@
           %li= msg
 
   .field
-    = f.label :active
-    = f.check_box :active
-  .field
     = f.label :current_player
     = f.number_field :current_player
   .field
@@ -21,5 +18,62 @@
   .field
     = f.label :key
     = f.text_field :key
-  .actions
-    = f.submit 'Save'
+
+#sharebox
+  .name Share this clock:
+  = link_to "Link", key_view_clock_path(@clock.key)
+= form_for @switched_clock do |f|
+  #playersbox
+    = f.label :active
+    #clockstatus{:class => ("active" if @clock.active)}
+      Paused
+    = f.check_box :active
+    #p1box.clockbox{:class => ("active" if @clock.current_player == 1)}
+      .name Player 1
+      .switch 
+          = f.hidden_field :current_player
+          .actions
+            = f.submit 'Switch'
+      .time
+        .hours
+          = "%02d" % @clock.player_one_hours
+        = ":"
+        .minutes
+          = "%02d" % @clock.player_one_mins
+        = ":"
+        .seconds
+          = "%02d" % @clock.player_one_secs
+    #p2box.clockbox{:class => ("active" if @clock.current_player == 2)}
+      .name Player 2
+      .switch 
+        = form_for @switched_clock do |f|
+          = f.hidden_field :current_player
+          .actions
+            = f.submit 'Switch'
+      .time
+        .hours
+          = "%02d" % @clock.player_two_hours
+        = ":"
+        .minutes
+          = "%02d" % @clock.player_two_mins
+        = ":"
+        .seconds
+          = "%02d" % @clock.player_two_secs
+  #optionsbox
+    .name Options
+    %table
+      %thead
+        %tr
+          %td Set Time
+          %td
+      %tbody
+        %tr
+          %td Player 1
+          %td
+        %tr
+          %td Player 2
+          %td
+        %tr
+          %td
+          %td
+            = f.submit 'Save'
