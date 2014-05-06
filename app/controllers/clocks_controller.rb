@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class ClocksController < ApplicationController
-  before_action :set_clock, only: [:show, :edit, :update, :destroy]
+  before_action :set_clock, only: [:show, :update]
 
   # GET /clocks
   # GET /clocks.json
@@ -12,11 +12,6 @@ class ClocksController < ApplicationController
   # GET /123401230h10101gh1ghg10
   # GET /123401230h10101gh1ghg10.json
   def show
-    @switched_clock = @clock.dup
-    @switched_clock.switch_current_player
-
-    puts "clock! #{@clock.id} #{@clock.key}"
-    puts "switched! #{@switched_clock.id} #{@switched_clock.key}"
   end
 
   # GET /clocks/1/edit
@@ -45,7 +40,7 @@ class ClocksController < ApplicationController
     respond_to do |format|
       if @clock.update(clock_params)
         format.html { redirect_to key_view_clock_url @clock.key, notice: 'Clock was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @clock }
       else
         format.html { render action: 'edit' }
         format.json { render json: @clock.errors, status: :unprocessable_entity }
@@ -76,6 +71,6 @@ class ClocksController < ApplicationController
     end
 
     def default_params
-      {:active => false, :current_player => 1, :player_one_time => 60, :player_two_time => 60, :key => SecureRandom.hex}
+      {:active => false, :current_player => 1, :player_one_time => 60, :player_two_time => 60, :key => SecureRandom.hex[0..9]}
     end
 end
