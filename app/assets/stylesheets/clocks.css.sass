@@ -1,0 +1,61 @@
+#theclock
+  margin: 100px 100px
+  font-size: 36px
+  font-family: sans-serif
+  text-align: center
+
+  #playersbox
+    text-align: center
+    padding: 10px 30px
+    .clockbox
+      margin: 0
+      padding: 0
+      border: none
+      width: calc(50% - 26px)
+      float: left
+      display: inline-block
+      border: solid 3px transparent
+      padding: 10px
+      &.active
+        background-color: rgb(197, 255, 197)
+        &:hover
+          cursor: pointer
+      .time
+  #controlsbox
+    padding: 10px 30px
+    display: inline-block
+    margin: 10px 0
+    .btn
+      border: solid 2px #999
+      padding: 3px 10px
+      border-radius: 5px
+      &:hover
+        cursor: pointer 
+        border: solid 2px black
+
+// Stuff specific to paused or not
+
+#theclock.active
+  #playersbox
+  #controlsbox
+    #startbtn
+      display: none
+    #resetbtn
+      display: none
+
+#theclock:not(.active)
+  #playersbox
+    .clockbox
+      &.active
+        background-color: transparent
+        border: solid 3px rgb(200,255,200)
+        &:hover
+          cursor: default
+  #controlsbox
+    #pausebtn
+      display: none
+    #resetbtn
+      display: none
+
+#optionsbox
+  display: none
