@@ -5,38 +5,21 @@
   = link_to "Link", key_view_clock_path(@clock.key)
   #sharecopy{'title' => "Click to copy shareable link", 'data-href' => key_view_clock_path(@clock.key)}
     %span.fa.fa-files-o &nbsp;
-#theclock
+#theclock{'data-key' => @clock.key, :class => ("active" if @clock.active)}
+  #controlsbox
+    #startbtn.btn Start
+    #pausebtn.btn Pause
+    #resetbtn.btn Reset
   #playersbox
-    #clockstatus{:class => ("active" if @clock.active)}
-      Paused
     #p1box.clockbox{:class => ("active" if @clock.current_player == 1)}
       .name Player 1
-      .switch Switch
       .time
-        .hours
-          = "%02d" % @clock.player_one_hours
-        = ":"
-        .minutes
-          = "%02d" % @clock.player_one_mins
-        = ":"
-        .seconds
-          = "%02d" % @clock.player_one_secs
+        = "#{("%02d" % @clock.player_one_hours)}:#{("%02d" % @clock.player_one_mins)}:#{("%02d" % @clock.player_one_secs)}"
     #p2box.clockbox{:class => ("active" if @clock.current_player == 2)}
       .name Player 2
-      .switch Switch
       .time
-        .hours
-          = "%02d" % @clock.player_two_hours
-        = ":"
-        .minutes
-          = "%02d" % @clock.player_two_mins
-        = ":"
-        .seconds
-          = "%02d" % @clock.player_two_secs
-  #controlsbox
-    #startbtn.btn.active Start
-    #pausebtn.btn Pause
-  #optionsbox.active
+        = "#{("%02d" % @clock.player_two_hours)}:#{("%02d" % @clock.player_two_mins)}:#{("%02d" % @clock.player_two_secs)}"
+  #optionsbox
     .name Modify Player Times
     %table#p1times
       %tbody

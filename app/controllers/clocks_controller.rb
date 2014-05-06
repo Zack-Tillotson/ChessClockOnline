@@ -37,8 +37,12 @@ class ClocksController < ApplicationController
   # PATCH/PUT /clocks/1
   # PATCH/PUT /clocks/1.json
   def update
+
+    @clock.updateTimeLeft()
+    @clock.assign_attributes clock_params
+
     respond_to do |format|
-      if @clock.update(clock_params)
+      if @clock.save
         format.html { redirect_to key_view_clock_url @clock.key, notice: 'Clock was successfully updated.' }
         format.json { render json: @clock }
       else
@@ -67,7 +71,7 @@ class ClocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clock_params
-      params.permit(:active, :current_player, :player_one_time, :player_two_time, :key)
+      params.permit(:active, :current_player, :new_player_one_time, :new_player_two_time, :key)
     end
 
     def default_params
