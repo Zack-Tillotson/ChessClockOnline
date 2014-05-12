@@ -8,4 +8,4 @@ class @Clock extends Backbone.Model
     @on 'edit', ->
       @save()
     @on 'sync', ->
-      console.log "Changed!", @attributes
+      console.log "Model server sync!", @attributes
