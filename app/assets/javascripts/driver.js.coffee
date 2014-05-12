@@ -1,6 +1,6 @@
 $ ->
 
-  pusher = new Pusher '13988d5e9c7c21cbbbcf' # Set up pusher lib
+  window.pusher = new Pusher '13988d5e9c7c21cbbbcf', authEndpoint: '/pusher' # Set up pusher lib
 
   if not _.isEmpty(key = $('#theclock').data('key'))
 
