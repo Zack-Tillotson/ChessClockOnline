@@ -2,7 +2,9 @@ class @ClockView extends Backbone.View
 
   events:
     'click .clockbox': 'switchPlayer' # UI Events
-    'click #controlsbox .btn': 'switchActive'
+    'click #controlsbox #startbtn': 'switchActive'
+    'click #controlsbox #pausebtn': 'switchActive'
+    'click #controlsbox #resetbtn': 'resetState'
 
   initialize: ->
     @listenTo @model, 'sync', @updatePage
@@ -12,10 +14,13 @@ class @ClockView extends Backbone.View
     @channel.bind "client-#{@model.get('key')}-sync", @pusherSyncHandler
 
   updatePage: ->
-    if @model.get('active')
+    if @model.status() is "active"
       @beginBeatTimer()
     else
       @endBeatTimer()
+    $('#p1box .time').data("time", @model.get('player_one_time'))
+    $('#p2box .time').data("time", @model.get('player_two_time'))
+
     @render()
 
   switchActive: ->
@@ -30,11 +35,13 @@ class @ClockView extends Backbone.View
 
   render: ->
 
-    $('#theclock').toggleClass 'active', @model.get('active')
+    $('#theclock').toggleClass 'active', @model.status() is "active"
+    $('#theclock').toggleClass 'gameover', @model.status() is "game_over"
+    $('#theclock').toggleClass 'paused', @model.status() is "paused"
     $('#p1box').toggleClass 'active', @model.get('current_player') is 1
     $('#p2box').toggleClass 'active', @model.get('current_player') is 2
-    $('#p1box .time').html @prettifyTime @model.get('player_one_time')
-    $('#p2box .time').html @prettifyTime @model.get('player_two_time')
+    $('#p1box .time').html @prettifyTime $('#p1box .time').data("time")
+    $('#p2box .time').html @prettifyTime $('#p2box .time').data("time")
 
   triggerSync: =>
     console.log "Triggering sync!", "client-#{@model.get('key')}-sync", {yep: 'hai'}
@@ -44,7 +51,6 @@ class @ClockView extends Backbone.View
     console.log "pusher subscribed!", data
 
   pusherSyncHandler: (data) =>
-    console.log "pusher client sync!", data
     @model.set data
     @model.trigger 'edit'
 
@@ -52,8 +58,8 @@ class @ClockView extends Backbone.View
     key: @model.get 'key'
     active: @model.get 'active'
     current_player: @model.get 'current_player'
-    player_one_time: @parseTime $('#p1box .time').html()
-    player_two_time: @parseTime $('#p2box .time').html()
+    player_one_time: $('#p1box .time').data("time")
+    player_two_time: $('#p2box .time').data("time")
 
   beginBeatTimer: =>
     @endBeatTimer()
@@ -64,25 +70,24 @@ class @ClockView extends Backbone.View
     @timer = null
 
   handleBeatTimer: =>
+
     @decrementTime $('.active.clockbox').find('.time')
+
+    # Don't go past the end!
+    @handleEndOfTime() if $('.active.clockbox').find('.time').data('time') <= 0
+
+    @render()
 
   decrementTime: (el)->
 
     # Convert to seconds
-    timeInSeconds = @parseTime el.html()
+    timeInSeconds = el.data("time")
 
     # Decriment one
     timeInSeconds = timeInSeconds - 1
 
-    el.html @prettifyTime(timeInSeconds)
-
-    # Don't go past the end!
-    @handleEndOfTime() if timeInSeconds is 0
-
-  parseTime: (str) ->
-    _.reduce str.split(':'), (memo, piece) ->
-      memo * 60 + parseFloat(piece)
-    , 0
+    # Update the UI
+    timeInSeconds = el.data("time", timeInSeconds)
 
   prettifyTime: (timeInSeconds) ->
 
@@ -95,4 +100,13 @@ class @ClockView extends Backbone.View
 
   handleEndOfTime: ->
     @endBeatTimer()
+    @model.set 'player_one_time', $('#p1box .time').data("time")
+    @model.set 'player_two_time', $('#p2box .time').data("time")
     @model.set 'active', false
+    @model.trigger 'edit'
+
+  resetState: =>
+    @model.set 'new_player_one_time', 60
+    @model.set 'new_player_two_time', 60
+    @model.trigger 'edit'
+    @triggerSync()

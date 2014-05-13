@@ -16,10 +16,9 @@
       display: inline-block
       border: solid 3px transparent
       padding: 10px
+      cursor: pointer
       &.active
         background-color: rgb(197, 255, 197)
-        &:hover
-          cursor: pointer
       .time
   #controlsbox
     padding: 10px 30px
@@ -43,14 +42,21 @@
     #resetbtn
       display: none
 
-#theclock:not(.active)
+#theclock.gameover
   #playersbox
-    .clockbox
-      &.active
-        background-color: transparent
-        border: solid 3px rgb(200,255,200)
-        &:hover
-          cursor: default
+    .clockbox.active
+      background-color: rgb(255,200,200)
+  #controlsbox
+    #startbtn
+      display: none
+    #pausebtn
+      display: none
+
+#theclock.paused
+  #playersbox
+    .clockbox.active
+      background-color: transparent
+      border: solid 3px rgb(200,255,200)
   #controlsbox
     #pausebtn
       display: none

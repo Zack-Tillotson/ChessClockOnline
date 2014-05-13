@@ -3,19 +3,10 @@ require 'securerandom'
 class ClocksController < ApplicationController
   before_action :set_clock, only: [:show, :update]
 
-  # GET /clocks
-  # GET /clocks.json
-  def index
-    @clocks = Clock.all
-  end
-
   # GET /123401230h10101gh1ghg10
   # GET /123401230h10101gh1ghg10.json
   def show
-  end
-
-  # GET /clocks/1/edit
-  def edit
+    @clock.updateTimeLeft()
   end
 
   # POST /clocks
@@ -39,7 +30,13 @@ class ClocksController < ApplicationController
   def update
 
     @clock.updateTimeLeft()
-    @clock.assign_attributes clock_params
+    hash = clock_params
+    hash[:player_one_time] = hash[:new_player_one_time] if hash[:new_player_one_time]
+    hash[:player_two_time] = hash[:new_player_two_time] if hash[:new_player_two_time]
+    hash.delete("new_player_one_time")
+    hash.delete("new_player_two_time")
+    puts hash
+    @clock.assign_attributes hash
 
     respond_to do |format|
       if @clock.save
@@ -75,6 +72,6 @@ class ClocksController < ApplicationController
     end
 
     def default_params
-      {:active => false, :current_player => 1, :player_one_time => 60, :player_two_time => 60, :key => SecureRandom.hex[0..9]}
+      {:active => false, :current_player => 1, :player_one_time => 5, :player_two_time => 60, :key => SecureRandom.hex[0..4]}
     end
 end

@@ -1,8 +1,9 @@
 class Clock < ActiveRecord::Base
 
+  attr_reader :is_game_over
+
   # If the clock is active then subtrack time from the active player
   def updateTimeLeft
-    puts "update ya!", self.active, (Time.now - self.updated_at)
     if self.active
       time_diff = (Time.now - updated_at)
       if current_player == 1
@@ -42,6 +43,10 @@ class Clock < ActiveRecord::Base
   def switch_current_player
     val = 3 - current_player
     self.current_player = val
+  end
+
+  def is_game_over
+    self.player_one_time <= 0 or self.player_two_time <= 0
   end
 
 private
