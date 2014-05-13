@@ -72,6 +72,6 @@ class ClocksController < ApplicationController
     end
 
     def default_params
-      {:active => false, :current_player => 1, :player_one_time => 5, :player_two_time => 60, :key => SecureRandom.hex[0..4]}
+      {:active => false, :current_player => 1, :player_one_time => 60, :player_two_time => 60, :key => SecureRandom.hex[0..4]}
     end
 end
