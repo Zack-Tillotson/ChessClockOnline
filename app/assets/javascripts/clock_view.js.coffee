@@ -5,6 +5,7 @@ class @ClockView extends Backbone.View
     'click #controlsbox #startbtn': 'switchActive'
     'click #controlsbox #pausebtn': 'switchActive'
     'click #controlsbox #resetbtn': 'resetState'
+    'click #optionsbox .btn': 'changeTime'
 
   initialize: ->
     @listenTo @model, 'sync', @updatePage
@@ -29,9 +30,22 @@ class @ClockView extends Backbone.View
     @triggerSync()
 
   switchPlayer: ->
-    @model.set 'current_player',  3 - @model.get('current_player')
-    @model.trigger 'edit'
-    @triggerSync()
+    if not $('#theclock').hasClass 'gameover'
+      @model.set 'current_player',  3 - @model.get('current_player')
+      @model.trigger 'edit'
+      @triggerSync()
+
+  changeTime: (e) ->
+    if not $('#theclock').hasClass 'active'
+      playerLocation = $(e.target).data 'player-loc'
+      player = $(e.target).data 'player'
+      value = parseInt $(e.target).data('value')
+      prevValue = $("#{playerLocation} .time").data "time"
+
+      @model.set "new_#{player}", Math.max(value + prevValue, 0)
+
+      @model.trigger 'edit'
+      @triggerSync()
 
   render: ->
 
@@ -83,7 +97,7 @@ class @ClockView extends Backbone.View
     # Convert to seconds
     timeInSeconds = el.data("time")
 
-    # Decriment one
+    # Decrement one
     timeInSeconds = timeInSeconds - 1
 
     # Update the UI
@@ -100,13 +114,14 @@ class @ClockView extends Backbone.View
 
   handleEndOfTime: ->
     @endBeatTimer()
-    @model.set 'player_one_time', $('#p1box .time').data("time")
-    @model.set 'player_two_time', $('#p2box .time').data("time")
+    @model.set 'new_player_one_time', $('#p1box .time').data("time")
+    @model.set 'new_player_two_time', $('#p2box .time').data("time")
     @model.set 'active', false
     @model.trigger 'edit'
 
   resetState: =>
     @model.set 'new_player_one_time', 60
     @model.set 'new_player_two_time', 60
+    @model.set 'active', false
     @model.trigger 'edit'
     @triggerSync()

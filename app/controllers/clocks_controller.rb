@@ -35,7 +35,7 @@ class ClocksController < ApplicationController
     hash[:player_two_time] = hash[:new_player_two_time] if hash[:new_player_two_time]
     hash.delete("new_player_one_time")
     hash.delete("new_player_two_time")
-    puts hash
+    puts "Updating to: ", hash
     @clock.assign_attributes hash
 
     respond_to do |format|

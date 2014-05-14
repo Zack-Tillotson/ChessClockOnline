@@ -8,7 +8,10 @@ class @Clock extends Backbone.Model
     @on 'edit', ->
       @save()
     @on 'sync', ->
+      @unset 'new_player_one_time'
+      @unset 'new_player_two_time'
       console.log "Model server sync!", @attributes
+      console.log @status()
 
   status: ->
     if @get('is_game_over') or @is_game_over()

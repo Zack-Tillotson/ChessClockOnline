@@ -24,13 +24,32 @@
     padding: 10px 30px
     display: inline-block
     margin: 10px 0
-    .btn
-      border: solid 2px #999
-      padding: 3px 10px
-      border-radius: 5px
-      &:hover
-        cursor: pointer 
-        border: solid 2px black
+  #optionsbox
+    font-size: 20px
+    text-align: center
+    padding: 10px
+    border: solid 1px #ccc
+    clear: both
+    margin-top: 150px
+    .halfbox
+      width: calc(50% - 4px)
+      display: inline-block
+      margin: 0
+      padding: 0
+      table
+        display: inline-block
+        td:first-of-type
+          width: 100px
+        .btn
+          width: 50px
+
+.btn
+  border: solid 2px #999
+  padding: 3px 10px
+  border-radius: 5px
+  &:hover
+    cursor: pointer 
+    border: solid 2px black
 
 // Stuff specific to paused or not
 
@@ -41,6 +60,12 @@
       display: none
     #resetbtn
       display: none
+  #optionsbox
+    color: #ccc
+    .btn
+      border: solid 2px #ddd
+      &:hover
+        cursor: auto
 
 #theclock.gameover
   #playersbox
@@ -51,6 +76,8 @@
       display: none
     #pausebtn
       display: none
+    #resetbtn
+      visibility: hidden
 
 #theclock.paused
   #playersbox
@@ -62,6 +89,3 @@
       display: none
     #resetbtn
       display: none
-
-#optionsbox
-  display: none

@@ -21,39 +21,57 @@
         = "#{("%02d" % @clock.player_two_hours)}:#{("%02d" % @clock.player_two_mins)}:#{("%02d" % @clock.player_two_secs)}"
   #optionsbox
     .name Modify Player Times
-    %table#p1times
-      %tbody
-        %tr
-          %td Manually Change
-          %td
-            %input{:type => "text", :value => @clock.player_one_time} 
-        %tr
-          %td Add Time
-          %td
-            .btn +1 Min
-        %tr
-          %td
-          %td
-            .btn +30 Sec
-        %tr
-          %td
-          %td
-            .btn +1 Sec
-    %table#p2times
-      %tbody
-        %tr
-          %td Manually Change
-          %td
-            %input{:type => "text", :value => @clock.player_two_time} 
-        %tr
-          %td Add Time
-          %td
-            .btn +1 Min
-        %tr
-          %td
-          %td
-            .btn +30 Sec
-        %tr
-          %td
-          %td
-            .btn +1 Sec
+    .halfbox
+      %table#p1times
+        %tbody
+          %tr
+            %td Hours
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => 36000} +10
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => 3600} +1
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => -3600} -1
+          %tr
+            %td Minutes
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => 600} +10
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => 60} +1
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => -60} -1
+          %tr
+            %td Seconds
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => 10} +10
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => 1} +1
+            %td
+              .btn{"data-player" => "player_one_time", "data-player-loc" => "#p1box", "data-value" => -1} -1
+    .halfbox
+      %table#p2times
+        %tbody
+          %tr
+            %td Hours
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => 36000} +10
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => 3600} +1
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => -3600} -1
+          %tr
+            %td Minutes
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => 600} +10
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => 60} +1
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => -60} -1
+          %tr
+            %td Seconds
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => 10} +10
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => 1} +1
+            %td
+              .btn{"data-player" => "player_two_time", "data-player-loc" => "#p2box", "data-value" => -1} -1
