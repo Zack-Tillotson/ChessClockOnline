@@ -1,6 +1,6 @@
 SyncedChessClock::Application.routes.draw do
 
-  root 'welcome#index'
+  root 'clocks#create'
 
   post 'pusher' => 'pusher#authenticate', :as => "pusher_authentication", defaults: {format: 'json'}
 

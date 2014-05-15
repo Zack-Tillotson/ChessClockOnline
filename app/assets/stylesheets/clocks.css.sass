@@ -1,9 +1,19 @@
+#sharebox
+  font-size: 25px
+  text-align: center
+  position: fixed
+  bottom: 0
+  width: 100%
+  background-color: #eee
+  padding: 15px 0
+  border-top: solid 1px black
+  *
+    display: inline-block
+
 #theclock
-  margin: 100px 100px
   font-size: 36px
   font-family: sans-serif
   text-align: center
-
   #playersbox
     text-align: center
     padding: 10px 30px
@@ -11,10 +21,10 @@
       margin: 0
       padding: 0
       border: none
-      width: calc(50% - 26px)
+      width: calc(50% - 40px)
       float: left
       display: inline-block
-      border: solid 3px transparent
+      border: solid 10px transparent
       padding: 10px
       cursor: pointer
       &.active
@@ -28,7 +38,6 @@
     font-size: 20px
     text-align: center
     padding: 10px
-    border: solid 1px #ccc
     clear: both
     margin-top: 150px
     .halfbox
@@ -42,7 +51,6 @@
           width: 100px
         .btn
           width: 50px
-
 .btn
   border: solid 2px #999
   padding: 3px 10px
@@ -83,7 +91,7 @@
   #playersbox
     .clockbox.active
       background-color: transparent
-      border: solid 3px rgb(200,255,200)
+      border: solid 10px rgb(200,255,200)
   #controlsbox
     #pausebtn
       display: none
