@@ -1,0 +1,178 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+/* line 1, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#sharebox {
+  font-size: 25px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #eeeeee;
+  padding: 15px 0;
+  border-top: solid 1px black;
+}
+/* line 10, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#sharebox * {
+  display: inline-block;
+}
+
+/* line 13, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock {
+  font-size: 36px;
+  font-family: sans-serif;
+  text-align: center;
+}
+/* line 17, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #playersbox {
+  text-align: center;
+  padding: 10px 30px;
+}
+/* line 20, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #playersbox .clockbox {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: calc(50% - 40px);
+  float: left;
+  display: inline-block;
+  border: solid 10px transparent;
+  padding: 10px;
+  cursor: pointer;
+}
+/* line 30, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #playersbox .clockbox.active {
+  background-color: #c5ffc5;
+}
+/* line 33, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #controlsbox {
+  padding: 10px 30px;
+  display: inline-block;
+  margin: 10px 0;
+}
+/* line 37, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #optionsbox {
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  clear: both;
+  margin-top: 150px;
+}
+/* line 43, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #optionsbox .halfbox {
+  width: calc(50% - 4px);
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+/* line 48, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #optionsbox .halfbox table {
+  display: inline-block;
+}
+/* line 50, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #optionsbox .halfbox table td:first-of-type {
+  width: 100px;
+}
+/* line 52, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock #optionsbox .halfbox table .btn {
+  width: 50px;
+}
+
+/* line 54, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+.btn {
+  border: solid 2px #999999;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+/* line 58, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+.btn:hover {
+  cursor: pointer;
+  border: solid 2px black;
+}
+
+/* line 67, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.active #controlsbox #startbtn {
+  display: none;
+}
+/* line 69, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.active #controlsbox #resetbtn {
+  display: none;
+}
+/* line 71, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.active #optionsbox {
+  color: #cccccc;
+}
+/* line 73, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.active #optionsbox .btn {
+  border: solid 2px #dddddd;
+}
+/* line 75, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.active #optionsbox .btn:hover {
+  cursor: auto;
+}
+
+/* line 80, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.gameover #playersbox .clockbox.active {
+  background-color: #ffc8c8;
+}
+/* line 83, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.gameover #controlsbox #startbtn {
+  display: none;
+}
+/* line 85, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.gameover #controlsbox #pausebtn {
+  display: none;
+}
+/* line 87, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.gameover #controlsbox #resetbtn {
+  visibility: hidden;
+}
+
+/* line 92, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.paused #playersbox .clockbox.active {
+  background-color: transparent;
+  border: solid 10px #c8ffc8;
+}
+/* line 96, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.paused #controlsbox #pausebtn {
+  display: none;
+}
+/* line 98, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/clocks.css.sass */
+#theclock.paused #controlsbox #resetbtn {
+  display: none;
+}
+/* line 1, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/nav.css.sass */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* line 6, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/nav.css.sass */
+nav {
+  background-color: #ada068;
+  background-image: url("/assets/butter-bground.png");
+  text-align: center;
+  font-size: 30px;
+  padding: 10px 0;
+  border-bottom: solid 10px black;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 3px black;
+  font-weight: bold;
+}
+/* line 16, /home/memeyou/Documents/ChessClockOnline/app/assets/stylesheets/nav.css.sass */
+nav a:link, nav a:visited {
+  text-decoration: none;
+  color: white;
+}
